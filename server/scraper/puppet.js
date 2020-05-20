@@ -1,13 +1,14 @@
 const puppeteer = require('puppeteer');
 
-async function scrapeResults(url) {
+async function scrapeResults(searchTerm, pageNum) {
   try {
+    const url = `https://www.amazon.com/s?k=${searchTerm}&page=${pageNum}`;
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.goto(url);
 
     // Working as of: 2020-05-18
-
+    
     const productTitles = await page.evaluate(() => Array.from(document.getElementsByClassName('a-size-medium a-color-base a-text-normal'), element => element.textContent));
     const productRatings = await page.evaluate(() => Array.from(document.getElementsByClassName('a-icon-alt'), element => element.textContent));
     const productPriceWhole = await page.evaluate(() => Array.from(document.getElementsByClassName('a-price-whole'), element => element.textContent));
@@ -33,8 +34,15 @@ async function scrapeResults(url) {
     };
 
     await browser.close();
+
+    return searchItems;
+
   } catch (err) {
-    console.log('Async Error');
-    console.log(err.message);
+    console.log(err);
+    return null;
   }
 }
+
+module.exports = {
+  scrapeResults
+};
