@@ -8,7 +8,7 @@ async function scrapeResults(searchTerm, pageNum) {
     await page.goto(url);
 
     // Working as of: 2020-05-18
-    
+
     const productTitles = await page.evaluate(() => Array.from(document.getElementsByClassName('a-size-medium a-color-base a-text-normal'), element => element.textContent));
     const productRatings = await page.evaluate(() => Array.from(document.getElementsByClassName('a-icon-alt'), element => element.textContent));
     const productPriceWhole = await page.evaluate(() => Array.from(document.getElementsByClassName('a-price-whole'), element => element.textContent));
@@ -18,8 +18,12 @@ async function scrapeResults(searchTerm, pageNum) {
 
     const filterLinks = (links) => {
       var seen = {};
-      var filterdLinks = links.filter((link) => { return link.indexOf('/gp/') === -1; });
-      return filterdLinks.filter((link) => { return seen.hasOwnProperty(link) ? false : (seen[link] = true); });
+      var filterdLinks = links.filter((link) => {
+        return link.indexOf('/gp/') === -1;
+      });
+      return filterdLinks.filter((link) => {
+        return seen.hasOwnProperty(link) ? false : (seen[link] = true);
+      });
     };
 
     const filterdLinks = filterLinks(productLinks);
