@@ -6,6 +6,8 @@ async function scrapeResults(searchTerm, pageNum) {
 
     // Working as of: 2020-05-27
 
+    searchTerm = searchTerm.replace(/_/g, '+').trim();
+
     const cluster = await Cluster.launch({
       concurrency: Cluster.CONCURRENCY_CONTEXT,
       maxConcurrency: 2
