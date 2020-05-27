@@ -1,6 +1,4 @@
 const express = require('express');
-const now = require('performance-now');
-
 const webScraper = require('./scraper/puppet');
 
 const app = express();
