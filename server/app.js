@@ -18,11 +18,15 @@ app.get('/deals/:searchTerm/:pageNum', async (req, res) => {
     results: null,
     error: false
   };
-  await webScraper.scrapeResults(searchTerm, pageNum).then((results) => {
-    response.results = results;
-  }).catch((err) => {
+  try {
+    await webScraper.scrapeResults(searchTerm, pageNum).then((results) => {
+      response.results = results;
+    }).catch((err) => {
+      response.error = true;
+    });
+  } catch (err) {
     response.error = true;
-  });
+  }
   res.json(response);
 });
 
