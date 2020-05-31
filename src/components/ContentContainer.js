@@ -2,16 +2,26 @@ import React from 'react';
 
 import '../scss/ContentContainer.scss';
 
+import * as apiService from '../services/api';
+
 import SearchContainer from './SearchContainer';
 
 class ContentContainer extends React.Component {
   state = {
-    searchTerm: ''
+    searchTerm: '',
+    pageNum: 1,
+    deals: []
   }
 
   setSearchTerm = (searchTerm) => {
     this.setState({ searchTerm });
   }
+
+  onSearchSubmit = async (event) => {
+    event.preventDefault();
+    const deals = await apiService.getApiDeals(this.state.searchTerm, this.state.pageNum);
+    this.setState({ deals });
+  };
 
   render() {
      return (
@@ -27,6 +37,7 @@ class ContentContainer extends React.Component {
          <SearchContainer 
           searchTerm={this.state.searchTerm}
           searchSet={this.setSearchTerm}
+          searchSubmit={this.onSearchSubmit}
         />
        </div>
      )

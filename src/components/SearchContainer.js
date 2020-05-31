@@ -3,16 +3,11 @@ import React from 'react';
 import '../scss/SearchContainer.scss';
 
 class SearchContainer extends React.Component {
-
-  onSearchSubmit(event) {
-    event.preventDefault();
-  }
-
   render() {
     return (
       <div id="searchContainer">
         <div id="searchItems">
-          <form id="searchForm" method="GET" onSubmit={(event) => this.onSearchSubmit(event)}>
+          <form id="searchForm" method="GET" onSubmit={(event) => this.props.searchSubmit(event)}>
             <input 
               id="searchInput" 
               type="text" 
