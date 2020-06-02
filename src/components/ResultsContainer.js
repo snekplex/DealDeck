@@ -3,6 +3,8 @@ import Loader from 'react-loader-spinner';
 
 import '../scss/ResultsContainer.scss';
 
+import CardsContainer from './CardsContainer';
+
 class ResultsContainer extends React.Component {
   render() {
     if (this.props.isLoading) {
@@ -23,7 +25,7 @@ class ResultsContainer extends React.Component {
     } else {
       return (
         <div id="resultsContainer">
-          { this.props.results.length >= 1 ? JSON.stringify(this.props.results) : null }
+          <CardsContainer data={this.props.results}/>
         </div>
       )
     }
