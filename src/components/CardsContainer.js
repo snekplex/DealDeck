@@ -5,27 +5,30 @@ import '../scss/CardsContainer.scss';
 class Card extends React.Component {
   render() {
     return (
-      <div className="card">
+      <div className="card" onClick={() => window.open(this.props.url, '_blank') }>
         <img className="card-img" src={this.props.imgUrl} alt={this.props.cardTitle}></img>
         <span className="card-title">{this.props.title}</span>
-        <span className="card-price">{this.props.price}</span>
-        <span className="card-list-price">{this.props.listPrice}</span>
-        <span className="card-savings">{this.props.savings}</span>
+        <span className="card-price">Current Price: {this.props.price}</span>
+        <span className="card-list-price">List Price: {this.props.listPrice}</span>
+        <span className="card-savings">Savings: {this.props.savings}</span>
       </div>
     )
   }
 }
 
 class Cards extends React.Component {
-  filteredData = this.props.cardData.filter((data) => {
-    return data.productListPrice && data.productSavings
-  });
   render() {
-    if (this.filteredData.length >= 1) {
+    var filteredData = [];
+    if (this.props.cardData) {
+      filteredData = this.props.cardData.filter((data) => {
+        return data.productListPrice && data.productSavings
+      });
+    }
+    if (filteredData.length >= 1) {
       return (
         <div className="cards">
           {
-            this.filteredData.map((cardData) => (
+            filteredData.map((cardData) => (
               <Card
                 key={cardData.productUrl}
                 url={cardData.productUrl}
@@ -37,12 +40,19 @@ class Cards extends React.Component {
               />
             ))
           }
+          <button
+            className="back-to-top-btn" 
+            onClick={() => window.scrollTo(0, 0)}>
+            Back To Top
+          </button>
         </div>
       )
     } else {
       return (
         <div id="cards">
-          No deals available
+          <span className="loading-text">
+            No deals available
+          </span>
         </div>
       )
     }

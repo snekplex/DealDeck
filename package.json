@@ -7,6 +7,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
+    "concurrently": "^5.2.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "node-sass": "^4.14.0",
@@ -15,13 +16,15 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-loader-spinner": "^3.1.14",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "serve": "^11.3.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"node ./server/app\" \"serve -s build\"",
     "start-serv": "node ./server/app.js",
     "start-dev-serv": "nodemon ./server/app",
-    "build": "react-scripts build",
+    "start-dev": "react-scripts start",
+    "build-frontend": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

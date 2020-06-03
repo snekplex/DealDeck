@@ -1,0 +1,24 @@
+@include mediaSm {
+    body {
+        #cardsContainer {
+            .cards {
+                .card {
+                    padding: 10px;
+                }
+            }
+        }
+    }
+}
+
+@include mediaXl {
+    body {
+        #cardsContainer {
+            .cards {
+                .card {
+                    width: 50%;
+                }
+            }
+        }
+    }
+}
+

@@ -15,11 +15,11 @@ class ResultsContainer extends React.Component {
             color="#000000"
             width={250}
             height={250}
-            timeout={60000}
           ></Loader>
           <span className="loading-text">
             Loading deals...
           </span>
+          <span>(May take some time)</span>
         </div>
       )
     } else {
